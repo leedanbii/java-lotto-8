@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.function.Supplier;
 import lotto.domain.Amount;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
@@ -22,12 +23,13 @@ public class LottoController {
     }
 
     public void run() {
-        Amount amount = inputAmount();
-        Lotteries lotteries = lottoService.purchaseLotteries(amount);
+        Amount amount = readInput(() -> lottoService.createAmount(inputView.readAmount()));
 
+        Lotteries lotteries = lottoService.purchaseLotteries(amount);
         outputView.printPurchasedLotteries(lotteries.size(), lotteries.getNumbers());
 
-        Lotto WinningNumbers = inputWinningNumber();
+        Lotto WinningNumbers = readInput(() -> lottoService
+                .createWinningLottoNumbers(inputView.readWinningNumbers()));
         WinningLotto winningLotto = inputBonusNumber(WinningNumbers);
 
         LottoResult lottoResult = lottoService.calculateLottoResult(winningLotto, lotteries, amount);
@@ -35,22 +37,10 @@ public class LottoController {
         outputView.printWinningResult(lottoResult.getFormattedStatistics());
     }
 
-    public Amount inputAmount() {
+    private <T> T readInput(Supplier<T> supplier) {
         while (true) {
-            try {
-                String rawAmount = inputView.readAmount();
-                return lottoService.createAmount(rawAmount);
-            } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
-            }
-        }
-    }
-
-    public Lotto inputWinningNumber() {
-        while (true) {
-            try {
-                String rawWinningLotto = inputView.readWinningNumbers();
-                return lottoService.createWinningLottoNumbers(rawWinningLotto);
+            try{
+                return supplier.get();
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }
