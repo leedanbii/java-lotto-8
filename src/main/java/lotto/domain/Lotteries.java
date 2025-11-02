@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lotto.message.ErrorMessage;
 
 public class Lotteries {
@@ -18,6 +20,21 @@ public class Lotteries {
         }
     }
 
+    public int size() {
+        return lotteries.size();
+    public Map<Rank, Long> countByRank(WinningLotto winningLotto) {
+        return calculateRanks(winningLotto).stream()
+                .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
+    }
+
+    public List<Lotto> getLotteries() {
+        return List.copyOf(lotteries);
+    public List<Rank> calculateRanks(WinningLotto winningLotto) {
+        return lotteries.stream()
+                .map(lotto -> Rank.of(lotto, winningLotto))
+                .filter(rank -> rank != Rank.NONE)
+                .toList();
+    }
     public int size() {
         return lotteries.size();
     }

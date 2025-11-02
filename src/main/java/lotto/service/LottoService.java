@@ -3,6 +3,7 @@ package lotto.service;
 import java.util.List;
 import java.util.stream.IntStream;
 import lotto.domain.Amount;
+import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lotteries;
@@ -31,4 +32,17 @@ public class LottoService {
         return new Lotteries(issuedLotteries);
     }
 
+    public Lotto createWinningLottoNumbers(String rawWinningNumber) {
+        List<Integer> winningNumbers = WinningLottoNumbersParser.parser(rawWinningNumber);
+        return Lotto.fromUserInput(winningNumbers);
+    }
+
+    public BonusNumber createBonusNumber(String rawBonusNumber) {
+        int bonusNumber = BonusNumberParser.parser(rawBonusNumber);
+        return BonusNumber.fromUserInput(bonusNumber);
+    }
+
+    public WinningLotto createWinningLotto(Lotto winningNumber, BonusNumber bonusNumber) {
+        return WinningLotto.of(winningNumber, bonusNumber);
+    }
 }
