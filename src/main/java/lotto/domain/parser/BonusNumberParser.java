@@ -1,27 +1,23 @@
 package lotto.domain.parser;
 
+import java.math.BigInteger;
 import lotto.message.ErrorMessage;
 
-public class BonusNumberParser {
+public class BonusNumberParser extends AbstractNumberParser {
 
     private BonusNumberParser() { }
 
     public static int parser(String rawBonusNumber) {
-        validateNotBlank(rawBonusNumber);
-        return parseToInt(rawBonusNumber);
+        return new BonusNumberParser().parse(rawBonusNumber);
     }
 
-    private static void validateNotBlank(String rawBonusNumber) {
-        if (rawBonusNumber == null || rawBonusNumber.isBlank()) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_BONUS_NUMBER_REQUIRED.formatted());
-        }
+    @Override
+    protected ErrorMessage blankErrorMessage() {
+        return ErrorMessage.ERROR_INPUT_BONUS_NUMBER_REQUIRED;
     }
 
-    private static int parseToInt(String rawBonusNumber) {
-        try {
-            return Integer.parseInt(rawBonusNumber);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_INPUT_BONUS_NUMBER_FORMAT.formatted());
-        }
+    @Override
+    protected ErrorMessage formatErrorMessage() {
+        return ErrorMessage.ERROR_INPUT_BONUS_NUMBER_FORMAT;
     }
 }
