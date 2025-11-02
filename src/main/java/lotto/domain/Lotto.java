@@ -34,19 +34,19 @@ public class Lotto {
 
     private void validateNumberCount(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_COUNT_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_COUNT.formatted());
         }
     }
 
     private void validateNumberRange(List<Integer> numbers) {
         if (numbers.stream().anyMatch(n -> n < LOTTO_NUMBER_MINIMUM || n > LOTTO_NUMBER_MAXIMUM)) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_RANGE_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_RANGE.formatted());
         }
     }
 
     private void validateNumberDuplicate(List<Integer> numbers) {
         if (numbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_RANGE_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_DUPLICATE.formatted());
         }
     }
 

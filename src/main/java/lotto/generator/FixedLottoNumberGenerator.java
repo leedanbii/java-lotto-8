@@ -10,7 +10,7 @@ public class FixedLottoNumberGenerator implements LottoNumberGenerator {
 
     public FixedLottoNumberGenerator(List<Integer> fixedNumbers) {
         if (fixedNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_COUNT_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_NUMBER_COUNT.formatted());
         }
         this.fixedNumbers = fixedNumbers;
     }

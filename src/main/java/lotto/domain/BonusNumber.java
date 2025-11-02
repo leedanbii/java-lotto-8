@@ -23,7 +23,7 @@ public class BonusNumber {
 
     private void validateNumberRange(int number) {
         if (number < LOTTO_NUMBER_MINIMUM || number > LOTTO_NUMBER_MAXIMUM) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_BONUS_NUMBER_RANGE_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_BONUS_NUMBER_RANGE.formatted());
         }
     }
 

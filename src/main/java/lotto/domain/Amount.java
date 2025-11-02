@@ -26,19 +26,19 @@ public class Amount {
 
     private void validateAmountMin(int amount) {
         if (amount < AMOUNT_MIN) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_AMOUNT_MINIMUM_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_AMOUNT_MINIMUM.formatted());
         }
     }
 
     private void validateAmountUnit(int amount) {
         if (amount % UNIT != 0) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_AMOUNT_UNIT_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_AMOUNT_UNIT.formatted());
         }
     }
 
     private void validateAmountMax(int amount) {
         if (amount > AMOUNT_MAX) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_AMOUNT_MAXIMUM_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_AMOUNT_MAXIMUM.formatted());
         }
     }
 

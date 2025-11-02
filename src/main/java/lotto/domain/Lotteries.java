@@ -14,7 +14,7 @@ public class Lotteries {
 
     private void validateSize(List<Lotto> lotteries) {
         if (lotteries.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTERIES_EMPTY_MESSAGE.formatted());
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTERIES_EMPTY.formatted());
         }
     }
 
