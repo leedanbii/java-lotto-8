@@ -41,9 +41,4 @@ public class Lotteries {
     public int size() {
         return lotteries.size();
     }
-
-    public List<Lotto> getLotteries() {
-        return List.copyOf(lotteries);
-    }
-
 }
