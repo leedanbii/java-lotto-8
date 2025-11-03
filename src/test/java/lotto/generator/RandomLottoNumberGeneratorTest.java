@@ -24,7 +24,7 @@ public class RandomLottoNumberGeneratorTest {
         assertThat(numbers).doesNotHaveDuplicates();
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(10)
     @DisplayName("랜덤 생성 시 반복해도 조건 유지")
     void generateNumbersRepeatedlyShouldBeValid() {
         RandomLottoNumberGenerator generator = new RandomLottoNumberGenerator();

@@ -18,6 +18,11 @@ import lotto.generator.LottoNumberGenerator;
 import lotto.generator.RandomLottoNumberGenerator;
 
 public class LottoService {
+    private final LottoNumberGenerator generator;
+
+    public LottoService(LottoNumberGenerator generator) {
+        this.generator = generator;
+    }
 
     public Amount createAmount(String rawAmount) {
         int amount = AmountParser.parser(rawAmount);
@@ -30,8 +35,6 @@ public class LottoService {
     }
 
     private Lotteries issueLotteries(LottoCount lottoCount) {
-        LottoNumberGenerator generator = new RandomLottoNumberGenerator();
-
         List<Lotto> issuedLotteries = IntStream.range(0, lottoCount.getCount())
                 .mapToObj(i -> Lotto.of(generator))
                 .toList();
