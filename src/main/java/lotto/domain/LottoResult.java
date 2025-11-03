@@ -22,7 +22,7 @@ public class LottoResult {
 
     private void validate(Map<Rank, Long> rankCounts) {
         if (rankCounts == null || rankCounts.values().stream().anyMatch(Objects::isNull)) {
-            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_RESULT_RANK_COUNTS_REQUIRED.formatted());
+            throw new IllegalStateException(ErrorMessage.ERROR_DOMAIN_LOTTO_RESULT_RANK_COUNTS_REQUIRED.formatted());
         }
     }
 

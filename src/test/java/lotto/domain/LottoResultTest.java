@@ -98,7 +98,7 @@ class LottoResultTest {
 
         // then
         assertThatThrownBy(() -> new LottoResult(rankCounts, TOTAL_PURCHASE))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ErrorMessage.ERROR_DOMAIN_LOTTO_RESULT_RANK_COUNTS_REQUIRED.formatted());
     }
 }
