@@ -25,7 +25,9 @@ public enum ErrorMessage {
 
     ERROR_DOMAIN_WINNING_LOTTO_BONUS_DUPLICATE("보너스 번호는 당첨 번호와 중복될 수 없습니다."),
 
-    ERROR_DOMAIN_LOTTERIES_EMPTY("로또는 하나 이상 발행되어야 합니다.");
+    ERROR_DOMAIN_LOTTERIES_EMPTY("로또는 하나 이상 발행되어야 합니다."),
+
+    ERROR_DOMAIN_LOTTO_RESULT_RANK_COUNTS_REQUIRED("당첨 결과가 없거나 또는 빈 값을 포함하고 있습니다.");
 
     private static final String errorMessageTag = "[ERROR] ";
 

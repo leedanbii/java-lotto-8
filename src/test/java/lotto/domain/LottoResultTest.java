@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import lotto.message.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -82,5 +84,21 @@ class LottoResultTest {
         assertThat(stats.get(stats.size() - 1))
                 .startsWith(WINNING_RATE_PREFIX)
                 .endsWith(WINNING_RATE_SUFFIX);
+    }
+
+    @Test
+    @DisplayName("rankCounts에 null 값이 있으면 예외 발생")
+    void constructorShouldThrowExceptionWhenRankCountsContainsNullValue() {
+        // given
+        Map<Rank, Long> rankCounts = new EnumMap<>(Rank.class);
+        rankCounts.put(Rank.FIRST, 1L);
+
+        // when
+        rankCounts.put(Rank.THIRD, null);
+
+        // then
+        assertThatThrownBy(() -> new LottoResult(rankCounts, TOTAL_PURCHASE))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.ERROR_DOMAIN_LOTTO_RESULT_RANK_COUNTS_REQUIRED.formatted());
     }
 }

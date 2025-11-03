@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import lotto.message.ErrorMessage;
 
 public class LottoResult {
 
@@ -12,9 +14,16 @@ public class LottoResult {
     private final int totalPurchaseAmount;
 
     public LottoResult(Map<Rank, Long> rankCounts, int totalPurchaseAmount) {
+        validate(rankCounts);
         this.rankCounts = rankCounts;
         this.totalPurchaseAmount = totalPurchaseAmount;
         this.totalPrize = calculateTotalPrize(rankCounts);
+    }
+
+    private void validate(Map<Rank, Long> rankCounts) {
+        if (rankCounts == null || rankCounts.values().stream().anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException(ErrorMessage.ERROR_DOMAIN_LOTTO_RESULT_RANK_COUNTS_REQUIRED.formatted());
+        }
     }
 
     private int calculateTotalPrize(Map<Rank, Long> rankCounts) {
@@ -55,9 +64,5 @@ public class LottoResult {
 
     public Map<Rank, Long> getRankCounts() {
         return rankCounts;
-    }
-
-    public int getTotalPrize() {
-        return totalPrize;
     }
 }
