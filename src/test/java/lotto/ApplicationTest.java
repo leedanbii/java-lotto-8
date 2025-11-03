@@ -1,6 +1,7 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,7 +14,8 @@ class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
-    void 기능_테스트() {
+    @DisplayName("기능 테스트 정상")
+    void successFlow() {
         assertRandomUniqueNumbersInRangeTest(
                 () -> {
                     run("8000", "1,2,3,4,5,6", "7");
@@ -47,11 +49,45 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 예외_테스트() {
+    @DisplayName("예외 테스트")
+    void invalidInputThrowsException() {
         assertSimpleTest(() -> {
             runException("1000j");
             assertThat(output()).contains(ERROR_MESSAGE);
         });
+    }
+
+    @Test
+    @DisplayName("잘못된 입력 후 재입력 성공")
+    void retryAfterInvalidInput() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("-1000", "8000", "1,2,3,4,5,6", "7");
+
+                    assertThat(output()).contains(ERROR_MESSAGE);
+
+                    assertThat(output()).contains(
+                            "8개를 구매했습니다.",
+                            "[1, 2, 3, 4, 5, 6]",
+                            "[7, 8, 9, 10, 11, 12]",
+                            "[13, 14, 15, 16, 17, 18]",
+                            "[19, 20, 21, 22, 23, 24]",
+                            "[25, 26, 27, 28, 29, 30]",
+                            "[31, 32, 33, 34, 35, 36]",
+                            "[37, 38, 39, 40, 41, 42]",
+                            "[1, 2, 3, 43, 44, 45]",
+                            "총 수익률은"
+                    );
+                },
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(7, 8, 9, 10, 11, 12),
+                List.of(13, 14, 15, 16, 17, 18),
+                List.of(19, 20, 21, 22, 23, 24),
+                List.of(25, 26, 27, 28, 29, 30),
+                List.of(31, 32, 33, 34, 35, 36),
+                List.of(37, 38, 39, 40, 41, 42),
+                List.of(43, 44, 45, 1, 2, 3)
+        );
     }
 
     @Override
